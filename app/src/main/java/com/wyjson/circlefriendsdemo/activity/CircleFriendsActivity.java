@@ -18,6 +18,8 @@ public class CircleFriendsActivity extends FragmentActivity {
     private static CircleFriendsActivity mInstance;
     private static boolean isQuickAgainOpen;
 
+    private CircleFriendsFragment mFragment;
+
     public static void go(Context context) {
         if (mInstance != null) {
             isQuickAgainOpen = true;
@@ -31,17 +33,34 @@ public class CircleFriendsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         mInstance = this;
         setContentView(R.layout.activity_circle_friends);
-
+        findFragment(savedInstanceState);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        CircleFriendsFragment circleFriendsFragment = CircleFriendsFragment.showFragment();
-        fragmentTransaction.add(R.id.fl_content, circleFriendsFragment, circleFriendsFragment.getClass().getSimpleName());
+        if (mFragment == null) {
+            mFragment = CircleFriendsFragment.showFragment();
+            fragmentTransaction.add(R.id.fl_content, mFragment, "fragment");
+        } else {
+            fragmentTransaction.show(mFragment);
+        }
         fragmentTransaction.commit();
+    }
+
+    private void findFragment(Bundle savedInstanceState) {
+        if (savedInstanceState != null)
+            mFragment = (CircleFriendsFragment) getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mFragment != null && mFragment.isAdded())
+            getSupportFragmentManager().putFragment(outState, "fragment", mFragment);
     }
 
     @Override
     protected void onDestroy() {
         mInstance = null;
         super.onDestroy();
+
         if (isQuickAgainOpen) {
             isQuickAgainOpen = false;
             go(this);
