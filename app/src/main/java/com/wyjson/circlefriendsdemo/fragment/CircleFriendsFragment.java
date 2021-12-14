@@ -24,7 +24,7 @@ import com.wyjson.circlefriendsdemo.adapter.CircleFriendsAdapter;
 import java.lang.ref.WeakReference;
 
 /**
- * 实现朋友圈再次打开,恢复上次页面状态
+ * 实现微信朋友圈再次打开,恢复上次页面状态
  */
 public class CircleFriendsFragment extends Fragment {
 

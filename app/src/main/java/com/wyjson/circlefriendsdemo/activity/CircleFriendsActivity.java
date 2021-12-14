@@ -11,7 +11,7 @@ import com.wyjson.circlefriendsdemo.R;
 import com.wyjson.circlefriendsdemo.fragment.CircleFriendsFragment;
 
 /**
- * 实现朋友圈再次打开,恢复上次页面状态
+ * 实现微信朋友圈再次打开,恢复上次页面状态
  */
 public class CircleFriendsActivity extends FragmentActivity {
 
