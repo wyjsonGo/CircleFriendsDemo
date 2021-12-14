@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.wyjson.circlefriendsdemo.R;
 import com.wyjson.circlefriendsdemo.fragment.CircleFriendsFragment;
 
+/**
+ * 实现朋友圈再次打开,恢复上次页面状态
+ */
 public class CircleFriendsActivity extends FragmentActivity {
 
     private static CircleFriendsActivity mInstance;
@@ -30,11 +32,10 @@ public class CircleFriendsActivity extends FragmentActivity {
         mInstance = this;
         setContentView(R.layout.activity_circle_friends);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         CircleFriendsFragment circleFriendsFragment = CircleFriendsFragment.showFragment();
-        transaction.add(R.id.fl_content, circleFriendsFragment, circleFriendsFragment.getClass().getSimpleName());
-        transaction.commit();
+        fragmentTransaction.add(R.id.fl_content, circleFriendsFragment, circleFriendsFragment.getClass().getSimpleName());
+        fragmentTransaction.commit();
     }
 
     @Override
